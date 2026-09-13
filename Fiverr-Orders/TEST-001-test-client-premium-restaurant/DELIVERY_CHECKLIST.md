@@ -16,12 +16,12 @@ Do not mark the Fiverr order complete until Amir says **DELIVER NOW**.
 
 ## QA
 
-- [ ] `npm run typecheck`
-- [ ] `npm run lint`
-- [ ] `npm run test`
-- [ ] `npm run build`
-- [ ] Browser pass (desktop + mobile)
-- [ ] Console / broken-link / security review
+- [x] `npm run typecheck`
+- [x] `npm run lint`
+- [x] `npm run test`
+- [x] `npm run build`
+- [x] Browser pass (desktop + mobile, headless Chrome)
+- [x] Console / broken-link / security review
 
 ## Approval
 

@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import Reveal from '../components/Reveal';
 import { contactPlaceholders } from '../data/sampleContent';
 import {
   emptyReservation,
@@ -39,7 +38,7 @@ export default function Contact() {
       </header>
 
       <section className="section contact-grid">
-        <Reveal className="contact-panel">
+        <div className="contact-panel">
           <form onSubmit={onSubmit} noValidate>
             <Field
               id="name"
@@ -113,9 +112,9 @@ export default function Contact() {
               </p>
             )}
           </form>
-        </Reveal>
+        </div>
 
-        <Reveal className="contact-panel">
+        <div className="contact-panel">
           <p className="section-kicker">House notes</p>
           <h2>How to find us</h2>
           <ul className="detail-list">
@@ -140,7 +139,7 @@ export default function Contact() {
               </li>
             ))}
           </ul>
-        </Reveal>
+        </div>
       </section>
     </>
   );

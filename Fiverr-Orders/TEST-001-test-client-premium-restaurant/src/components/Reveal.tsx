@@ -6,6 +6,11 @@ interface RevealProps {
   as?: 'div' | 'section' | 'article';
 }
 
+function shouldReveal(node: HTMLElement): boolean {
+  const rect = node.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.94 && rect.bottom > 0;
+}
+
 export default function Reveal({ children, className = '', as = 'div' }: RevealProps) {
   const Tag = as;
   const ref = useRef<HTMLDivElement | null>(null);
@@ -18,23 +23,43 @@ export default function Reveal({ children, className = '', as = 'div' }: RevealP
     }
 
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || typeof IntersectionObserver === 'undefined') {
+    if (reducedMotion || typeof IntersectionObserver === 'undefined' || shouldReveal(node)) {
       setVisible(true);
       return;
     }
 
+    const reveal = () => {
+      if (shouldReveal(node)) {
+        setVisible(true);
+        return true;
+      }
+      return false;
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
           setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.18 },
+      { threshold: 0.05, rootMargin: '80px 0px' },
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+
+    const onScroll = () => {
+      if (reveal()) {
+        window.removeEventListener('scroll', onScroll);
+        observer.disconnect();
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (

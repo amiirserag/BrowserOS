@@ -26,6 +26,19 @@ Date: 2026-09-13
 - Sample copy is labeled in the banner, footer, and `docs/SAMPLE_CONTENT.md`
 - No invented live address, phone, or client identity presented as real
 
+## Browser (headless Chrome)
+
+| Flow | Result |
+| --- | --- |
+| Home hero + sample banner | Pass |
+| Menu tasting → Mains tab | Pass |
+| Contact empty validation | Pass |
+| Contact complete submit (no outbound send) | Pass |
+| Mobile hamburger → Contact | Pass |
+| Console errors | None |
+
+Screenshots in `qa/screenshots/`. Browser-use MCP was unavailable; computer-use agent could not start (model quota). Verification used Puppeteer against `/usr/bin/google-chrome-stable`.
+
 ## Browser
 
-Recorded after the preview server is up. See `PREVIEW.md`.
+See `PREVIEW.md`.

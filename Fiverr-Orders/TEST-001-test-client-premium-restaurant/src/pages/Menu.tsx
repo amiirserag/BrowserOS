@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import Reveal from '../components/Reveal';
 import { menuCategories, type MenuCategoryId } from '../data/sampleContent';
 
 export default function Menu() {
@@ -48,14 +47,14 @@ export default function Menu() {
           <p className="lede">{category.intro}</p>
           <div className="menu-list">
             {category.items.map((item) => (
-              <Reveal as="article" className="menu-card" key={item.name}>
+              <article className="menu-card" key={item.name}>
                 <header>
                   <h3>{item.name}</h3>
                   <p className="price">{item.priceLabel}</p>
                 </header>
                 <p>{item.description}</p>
                 {item.note ? <p className="menu-note">{item.note}</p> : null}
-              </Reveal>
+              </article>
             ))}
           </div>
         </div>
